@@ -19,6 +19,7 @@ class _ImageInputState extends State<ImageInput> {
 
   //Take the image via accessing the camera or internal storage
   Future<void> _takeSnap() async {
+    //On selecting image from camera automatically filename will be given to that image
     final imageFile = await ImagePicker.pickImage(
       source: ImageSource.camera,
       maxWidth: 600,
@@ -30,9 +31,11 @@ class _ImageInputState extends State<ImageInput> {
     setState(() {
      _storedImage = imageFile; 
     });
-
+    
+    //Get the directory path that is safe & suggested by the android or ios
     final appDir = await syspath.getApplicationDocumentsDirectory();
     final fileName = path.basename(imageFile.path);
+    //Save image to the appdirectory location i.e inside memory
     final savedImage = await imageFile.copy('${appDir.path}/$fileName');
     widget.onSelectImage(savedImage);
   }
