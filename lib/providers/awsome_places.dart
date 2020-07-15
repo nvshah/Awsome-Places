@@ -7,9 +7,9 @@ import '../helpers/db_helpers.dart';
 
 class AwesomePlaces with ChangeNotifier {
   List<Place> _items = [];
-
   List<Place> get items => [..._items];
 
+  //Add data to sqlite database behind the Mobile Storage
   void addPlace(String title, File image) {
     final place = Place(
       id: DateTime.now().toString(),
@@ -28,6 +28,7 @@ class AwesomePlaces with ChangeNotifier {
     });
   }
 
+  //fetch data from sqlite database & set it to our data model over here
   Future<void> fetchAndSetPlaces() async {
     final dataList = await DBHelper.getData('user_places');
     _items = dataList

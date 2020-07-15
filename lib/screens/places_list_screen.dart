@@ -20,6 +20,7 @@ class PlacesListScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
+        //For the first time when we come to this page
         future: Provider.of<AwesomePlaces>(context, listen: false)
             .fetchAndSetPlaces(),
         builder: (ctxt, snapShot) => snapShot.connectionState ==
@@ -28,6 +29,7 @@ class PlacesListScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               )
             : Consumer<AwesomePlaces>(
+              //This allows us to rebuild the below parts only from further updates
                 child: Center(
                   child: Text('No Places !, Add Some one...'),
                 ),

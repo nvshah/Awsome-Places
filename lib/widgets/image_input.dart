@@ -70,6 +70,7 @@ class _ImageInputState extends State<ImageInput> {
         SizedBox(
           height: 10,
         ),
+        //Take Picture Button
         Expanded(
           child: FlatButton.icon(
             icon: Icon(Icons.camera),
