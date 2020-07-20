@@ -37,6 +37,7 @@ class _ImageInputState extends State<ImageInput> {
     final fileName = path.basename(imageFile.path);
     //Save image to the appdirectory location i.e inside memory
     final savedImage = await imageFile.copy('${appDir.path}/$fileName');
+    //pass image selected on Form Page
     widget.onSelectImage(savedImage);
   }
 

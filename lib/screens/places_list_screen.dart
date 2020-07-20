@@ -44,6 +44,7 @@ class PlacesListScreen extends StatelessWidget {
                                     FileImage(awesomePlaces.items[index].image),
                               ),
                               title: Text(awesomePlaces.items[index].title),
+                              subtitle: Text(awesomePlaces.items[index].location.address),
                               onTap: () {
                                 //GoTo Detai Page...
                               },
