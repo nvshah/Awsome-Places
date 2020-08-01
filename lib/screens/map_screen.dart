@@ -55,12 +55,16 @@ class _MapScreenState extends State<MapScreen> {
         //GoogleMap -> on Tap will automatically provide position in callback function handler
         onTap: widget.isSelecting ? _selectLocation : null,
         //Will contain set of Markers denoting on Map
-        markers: _pickedLocation == null
+        markers: (_pickedLocation == null && widget.isSelecting)
             ? null
             : {
                 Marker(
                   markerId: MarkerId('m1'),
-                  position: _pickedLocation,
+                  position: _pickedLocation ??
+                      LatLng(
+                        widget.initialLocation.latitude,
+                        widget.initialLocation.longitude,
+                      ),
                 )
               },
       ),

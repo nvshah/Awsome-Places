@@ -12,6 +12,7 @@ class AwesomePlaces with ChangeNotifier {
 
   //Add data to sqlite database behind the Mobile Storage
   Future<void> addPlace (String title, File image, PlaceLocation location) async {
+    //get the address for lat,long via reverse geo-coding
     final address = await LocationHelper.getLocationAddress(location.latitude, location.longitude);
     final updatedLocation = PlaceLocation(latitude: location.latitude, longitude: location.longitude, address: address);
 
@@ -50,5 +51,10 @@ class AwesomePlaces with ChangeNotifier {
             ))
         .toList();
     notifyListeners();
+  }
+
+  //find place by an id
+  Place findById(String id){
+    return _items.firstWhere((place) => place.id == id);
   }
 }

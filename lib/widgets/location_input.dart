@@ -17,13 +17,13 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   String _previewImageUrl;
 
-  void _previewMap(double lat, double lng){
+  void _previewMap(double lat, double lng) {
     //Get the static Map Image URL
     final staticMapImgUrl = LocationHelper.generateLocationPreviewImage(
       latitude: lat,
       longitude: lng,
     );
-
+    //Update the previewImageUrl -> that drives the image url to display map
     setState(() {
       _previewImageUrl = staticMapImgUrl;
     });
@@ -31,24 +31,26 @@ class _LocationInputState extends State<LocationInput> {
 
   //Get the Current Location
   Future<void> _getCurrentUserLocation() async {
-    try{
+    try {
       final locData = await Location().getLocation();
       _previewMap(locData.latitude, locData.longitude);
       widget.onSelectPlace(locData.latitude, locData.longitude);
-    }catch(error){
+    } catch (error) {
       return;
     }
   }
 
   Future<void> _selectOnMap() async {
-    //It will tell that once aftr pushed when you are returning back It will retuen LatLng
-    final selectedLocation = await Navigator.of(context).push<LatLng>(MaterialPageRoute(
-      //display cross instead of back arrow
-      fullscreenDialog: true,
-        builder: (ctxt) => MapScreen(
-              isSelecting: true,
-            )));
-    if(selectedLocation == null){
+    //It will tell that once aftr pushed when you are returning back It will retuen LatLng obj
+    final selectedLocation = await Navigator.of(context).push<LatLng>(
+      MaterialPageRoute(
+          //display cross instead of back arrow
+          fullscreenDialog: true,
+          builder: (ctxt) => MapScreen(
+                isSelecting: true,
+              )),
+    );
+    if (selectedLocation == null) {
       return;
     }
     //Update Image in Location Image Box
